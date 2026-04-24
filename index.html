@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Executive Financial KPI Dashboard</title>
+    <link rel="stylesheet" href="./styles.css?v=2" />
+  </head>
+  <body>
+    <div class="app-shell app-loading" id="appShell">
+      <aside class="sidebar glass-panel" id="sidebar">
+        <div class="sidebar__header">
+          <div>
+            <p class="eyebrow">Strategy Office</p>
+            <h1>Financial KPI Command Center</h1>
+          </div>
+          <button class="icon-button" id="sidebarToggle" aria-label="Collapse filters">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+        <div class="sidebar__section">
+          <p class="section-label">View Controls</p>
+          <div class="chip-group" id="viewModeGroup">
+            <button class="chip is-active" data-view-mode="year">Executive View</button>
+            <button class="chip" data-view-mode="month">Monthly Drilldown</button>
+          </div>
+        </div>
+
+        <div class="sidebar__section">
+          <p class="section-label">Global Filters</p>
+          <label class="filter-field">
+            <span>Date Window</span>
+            <select id="dateWindow"></select>
+          </label>
+          <label class="filter-field">
+            <span>Region</span>
+            <select id="regionFilter"></select>
+          </label>
+          <label class="filter-field">
+            <span>Category</span>
+            <select id="categoryFilter"></select>
+          </label>
+          <label class="filter-field">
+            <span>Primary Metric</span>
+            <select id="metricFilter">
+              <option value="revenue">Revenue</option>
+              <option value="profit">Profit</option>
+              <option value="margin">Profit Margin</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="sidebar__section">
+          <p class="section-label">Presentation Notes</p>
+          <div class="callout">
+            <p>
+              Designed for executive steering reviews, board updates, and consulting-style readouts.
+            </p>
+            <div class="callout__meta">
+              <span>Premium visual system</span>
+              <span>Interactive narrative</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar__section">
+          <p class="section-label">Focus Year</p>
+          <div class="year-pills" id="yearPills"></div>
+        </div>
+      </aside>
+
+      <main class="dashboard">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Executive Analytics Suite</p>
+            <h2>Enterprise Performance Dashboard</h2>
+            <p class="topbar__subtext">
+              A board-ready view of revenue quality, profitability, and forward-looking growth signals.
+            </p>
+          </div>
+
+          <div class="topbar__actions">
+            <div class="live-pill">
+              <span class="live-pill__dot"></span>
+              Updated for Q2 FY2026
+            </div>
+            <button class="theme-toggle glass-panel" id="themeToggle" aria-label="Toggle dark mode">
+              <span class="theme-toggle__label">Light Mode</span>
+              <span class="theme-toggle__track">
+                <span class="theme-toggle__thumb"></span>
+              </span>
+            </button>
+          </div>
+        </header>
+
+        <section class="hero-strip" id="heroStrip">
+          <article class="kpi-card glass-panel" data-kpi="revenue"></article>
+          <article class="kpi-card glass-panel" data-kpi="profit"></article>
+          <article class="kpi-card glass-panel" data-kpi="margin"></article>
+          <article class="kpi-card glass-panel" data-kpi="growth"></article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel panel--xl glass-panel">
+            <div class="panel__header">
+              <div>
+                <p class="section-label">Trend Analysis</p>
+                <h3 id="trendTitle">Revenue and Profit Trajectory</h3>
+              </div>
+              <div class="panel__actions">
+                <div class="segmented-control" id="granularityControl">
+                  <button class="is-active" data-view-mode="year">Year</button>
+                  <button data-view-mode="month">Month</button>
+                </div>
+              </div>
+            </div>
+            <div class="chart-stage chart-stage--hero">
+              <div class="skeleton skeleton--hero"></div>
+              <svg id="trendChart" viewBox="0 0 860 360" role="img" aria-label="Trend chart"></svg>
+            </div>
+          </article>
+
+          <article class="panel glass-panel">
+            <div class="panel__header">
+              <div>
+                <p class="section-label">Efficiency Lens</p>
+                <h3>Cost vs Revenue</h3>
+              </div>
+            </div>
+            <div class="chart-stage">
+              <div class="skeleton skeleton--chart"></div>
+              <svg id="compareChart" viewBox="0 0 420 300" role="img" aria-label="Cost versus revenue"></svg>
+            </div>
+          </article>
+
+          <article class="panel glass-panel">
+            <div class="panel__header">
+              <div>
+                <p class="section-label">Regional Performance</p>
+                <h3>Profit Contribution by Region</h3>
+              </div>
+            </div>
+            <div class="chart-stage">
+              <div class="skeleton skeleton--chart"></div>
+              <svg id="regionChart" viewBox="0 0 420 300" role="img" aria-label="Regional performance"></svg>
+            </div>
+          </article>
+
+          <article class="panel glass-panel">
+            <div class="panel__header">
+              <div>
+                <p class="section-label">Category Mix</p>
+                <h3>Margin by Portfolio</h3>
+              </div>
+            </div>
+            <div class="chart-stage chart-stage--donut">
+              <div class="skeleton skeleton--chart"></div>
+              <svg id="categoryChart" viewBox="0 0 420 300" role="img" aria-label="Category breakdown"></svg>
+            </div>
+          </article>
+
+          <article class="panel panel--insights glass-panel">
+            <div class="panel__header">
+              <div>
+                <p class="section-label">AI Insight Feed</p>
+                <h3>Executive Narrative</h3>
+              </div>
+            </div>
+            <div class="insights-list" id="insightsList"></div>
+          </article>
+        </section>
+      </main>
+
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <script src="./app.js?v=2"></script>
+  </body>
+</html>

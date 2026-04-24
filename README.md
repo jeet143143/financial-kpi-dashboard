@@ -19,4 +19,4 @@ From this directory, start a static server:
 python3 -m http.server 4173
 ```
 
-Then open `http://127.0.0.1:4173/index.html`.
+To open `https://2026-04-24-design-and-build-a-visua.vercel.app/`.
